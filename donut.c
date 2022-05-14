@@ -1,8 +1,18 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <time.h>
+
 int k;
 double sin() ,cos();
 
+int milliseconds = 10;
+struct timespec ts;
+
+
 // main
-main(){
+int main(){
+    ts.tv_sec = milliseconds / 1000;
+    ts.tv_nsec = (milliseconds % 1000) * 1000000;
     float a=0, b=0, i, j, z[1760];
     char screen[1760];
     printf("\x1b[2J");
@@ -45,6 +55,7 @@ main(){
             }
         }
 
+        
         // prints
         printf("\x1b[d");
         for(k=0; 1761>k; k++)
@@ -55,5 +66,6 @@ main(){
         }
         a+=0.04;
         b+= 0.02;
+        nanosleep(&ts, NULL);
     }
 }
